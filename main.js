@@ -10,8 +10,7 @@ var computerNum = 0
 var rps = ['rock', 'paper', 'scissors']
 var userWin = 0
 var userLose = 0 
-
-// var plays = 0
+var plays = 0
 
   function startGame() {
     computerNum = Math.floor(Math.random()*rps.length)
@@ -27,14 +26,14 @@ var userLose = 0
 
   $('.imgbutton').on('click', function(){
     startGame()
-    // plays++
+    plays++
     userChoice = $(this).data().type
     console.log(userChoice)
     $('#player_choice').text('You chose: ' + userChoice)
     console.log(computerNum)
     $('#computer_choice').text('The computer chose: ' + rps[computerNum])
     
-    winner(userChoice, computerNum)
+    winner(userChoice, computerNum, plays)
   })
 
   function winner(userChoice, computerNum, plays){
@@ -42,38 +41,37 @@ var userLose = 0
     (userChoice === 'paper' && computerNum === 0) ||
     (userChoice === 'scissors' && computerNum === 1)) {
       userWin++
-      // userWinPerc = (userWin / plays) * 100
-      // debugger
+      userWinPerc = (userWin / plays) * 100
       $('#results').text('You win! Congratulation')
-      $('#wins').text('Your total wins: ' + userWin /* + ', you win ' + userWinPerc + "% of the time."*/ )
+      $('#wins').text('Your total wins: ' + userWin + ', you win ' + Math.floor(userWinPerc) + "% of the time.")
     } else if ((userChoice === 'rock' && computerNum === 1) ||
     (userChoice === 'paper' && computerNum === 2) ||
     (userChoice === 'scissors' && computerNum === 0)) {
       userLose++
-      // userLosePerc = (userLose / plays * 100)
+      userLosePerc = (userLose / plays * 100)
       $('#results').text('You lose..... sucker.') 
-      $('#loses').text('Your total loses: ' + userLose /*+ ', you lose' + userLosePerc + "% of the time."*/)
+      $('#loses').text('Your total loses: ' + userLose + ', you lose ' + Math.floor(userLosePerc) + "% of the time.")
     } else {
       $('#results').text("It's a tie. Try again.").fadeToggle(2000)
     }
   }
 
   $('#firstbtn').on('click', function() {
-    var game = $('#page')
-    var startButton = $(this)
-
-    // if (startButton)
+    if (plays > 0) {
+      reset()
+    }
+    userWin = 0
+    userLose = 0 
+    plays = 0
       $('#page').slideDown(3000, function() {
-        //set some state of the elment
       })
-    // else 
-    //   button.text('Start Game')
 
-    // startButton.slideToggle(3000)
   })
 
-  // $('#new').on('click', fuction() {
-  //   var = new startGame
-  // })
-  
+  function reset() {
+    $('#wins').text('Your total wins: ')
+    $('#loses').text('Your total loses: ')
+    $('#player_choice').text('You chose: ') 
+    $('#computer_choice').text('The computer chose: ')
+  }
 })
