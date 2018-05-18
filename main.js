@@ -42,14 +42,14 @@ var plays = 0
     (userChoice === 'scissors' && computerNum === 1)) {
       userWin++
       userWinPerc = (userWin / plays) * 100
-      $('#results').text('You win! Congratulation')
+      $('#results').text('You win! Congratulation').fadeToggle(2000)
       $('#wins').text('Your total wins: ' + userWin + ', you win ' + Math.floor(userWinPerc) + "% of the time.")
     } else if ((userChoice === 'rock' && computerNum === 1) ||
     (userChoice === 'paper' && computerNum === 2) ||
     (userChoice === 'scissors' && computerNum === 0)) {
       userLose++
       userLosePerc = (userLose / plays * 100)
-      $('#results').text('You lose..... sucker.') 
+      $('#results').text('You lose..... sucker.').fadeToggle(2000)
       $('#loses').text('Your total loses: ' + userLose + ', you lose ' + Math.floor(userLosePerc) + "% of the time.")
     } else {
       $('#results').text("It's a tie. Try again.").fadeToggle(2000)
